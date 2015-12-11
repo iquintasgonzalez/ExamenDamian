@@ -68,7 +68,10 @@ public class ItemDetailFragment extends Fragment {
                 @Override
                 public void onClick(View v) {
                     ItemListFragment fragment = (ItemListFragment) getFragmentManager().findFragmentById(R.id.item_list);
-
+                    if (fragment == null || isInLayout()) {
+                        //Intent intent = new Intent();
+                        //getActivity().setResult(Activity.RESULT_OK, intent);
+                        getActivity().finish();
 
                 }
         }
