@@ -1,5 +1,6 @@
 package com.example.iquintasgonzalez.examendamian;
 
+import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
@@ -7,6 +8,7 @@ import android.support.v7.widget.Toolbar;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
 import android.view.View;
+import android.widget.Toast;
 
 
 /**
@@ -26,13 +28,16 @@ import android.view.View;
  * to listen for item selections.
  */
 public class ItemListActivity extends AppCompatActivity
+
         implements ItemListFragment.Callbacks {
+
 
     /**
      * Whether or not the activity is in two-pane mode, i.e. running on a tablet
      * device.
      */
     private boolean mTwoPane;
+    private boolean land;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -75,6 +80,13 @@ public class ItemListActivity extends AppCompatActivity
      */
     @Override
     public void onItemSelected(String id) {
+        //Recogemos del xml config el valor del item dual_pane. Para Land es true y para los demas false
+                Boolean bool = getResources().getBoolean(R.bool.dual_pane);
+                if (bool) {
+                        //Toast que se ejecutara cuando esta tumbado
+                                Toast.makeText(ItemListActivity.this, "Tumbado",
+                                                Toast.LENGTH_SHORT).show();
+                    }
         if (mTwoPane) {
             // In two-pane mode, show the detail view in this activity by
             // adding or replacing the detail fragment using a
@@ -93,6 +105,27 @@ public class ItemListActivity extends AppCompatActivity
             Intent detailIntent = new Intent(this, ItemDetailActivity.class);
             detailIntent.putExtra(ItemDetailFragment.ARG_ITEM_ID, id);
             startActivity(detailIntent);
+            // for the selected item ID.
+            startActivity(detailIntent);
+
+            startActivityForResult(detailIntent, 1);
+
+        }
+    }
+
+
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+        //Sobreescribimos el metodo que se ejecutara al terminar la activity lanzada con startActivityForResult()
+        if (requestCode == 1) {
+            //Codigo del intent
+            if (resultCode == Activity.RESULT_OK) {
+                //Resultado de la operacion
+                String result = data.getStringExtra("resultado");
+                Toast.makeText(ItemListActivity.this, result,
+                        Toast.LENGTH_SHORT).show();
+                //Creamos un Toast con la informacion enviada en el intent
+            }
         }
     }
 }

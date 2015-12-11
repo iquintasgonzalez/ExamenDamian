@@ -1,6 +1,7 @@
 package com.example.iquintasgonzalez.examendamian;
 
 import android.app.Activity;
+import android.content.Intent;
 import android.support.design.widget.CollapsingToolbarLayout;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
@@ -69,8 +70,8 @@ public class ItemDetailFragment extends Fragment {
                 public void onClick(View v) {
                     ItemListFragment fragment = (ItemListFragment) getFragmentManager().findFragmentById(R.id.item_list);
                     if (fragment == null || isInLayout()) {
-                        //Intent intent = new Intent();
-                        //getActivity().setResult(Activity.RESULT_OK, intent);
+                        Intent intent = new Intent();
+                        getActivity().setResult(Activity.RESULT_OK, intent);
                         getActivity().finish();
                     } else {
                         //getActivity().getSupportFragmentManager().beginTransaction().remove(fragment2).commit();
