@@ -64,10 +64,15 @@ public class ItemDetailFragment extends Fragment {
         if (mItem != null) {
             ((TextView) rootView.findViewById(R.id.item_detail)).setText(mItem.details);
             Button button = (Button) rootView.findViewById(R.id.button);
+            button.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    ItemListFragment fragment = (ItemListFragment) getFragmentManager().findFragmentById(R.id.item_list);
 
 
+                }
         }
-
+        }
 
 
 
