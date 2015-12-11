@@ -58,7 +58,7 @@ public class ItemDetailFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        View rootView = inflater.inflate(R.layout.fragment_item_detail, container, false);
+       final View rootView = inflater.inflate(R.layout.fragment_item_detail, container, false);
 
         // Show the dummy content as text in a TextView.
         if (mItem != null) {
@@ -72,12 +72,15 @@ public class ItemDetailFragment extends Fragment {
                         //Intent intent = new Intent();
                         //getActivity().setResult(Activity.RESULT_OK, intent);
                         getActivity().finish();
-
+                    } else {
+                        //getActivity().getSupportFragmentManager().beginTransaction().remove(fragment2).commit();
+                        ((TextView) rootView.findViewById(R.id.item_detail)).setText("");
+                    }
                 }
-        }
-        }
 
 
+            });
+        }
 
         return rootView;
     }
